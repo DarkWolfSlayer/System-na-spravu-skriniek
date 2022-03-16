@@ -1,4 +1,3 @@
 # System-na-spravu-skriniek
-Ide to?
-Nejdze more
-JAKO
+Ahoj Svet by Kukurišta
+Ahoj svet by Kakaši Hatake
