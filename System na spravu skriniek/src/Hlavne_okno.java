@@ -28,7 +28,6 @@ public class Hlavne_okno extends javax.swing.JFrame {
         RemoveUser = new javax.swing.JButton();
         AddUser = new javax.swing.JButton();
         EditUser = new javax.swing.JButton();
-        EditLocker = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,16 +59,14 @@ public class Hlavne_okno extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        RemoveUser.setBackground(new java.awt.Color(51, 51, 51));
         RemoveUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RemoveUser.png"))); // NOI18N
         RemoveUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemoveUserActionPerformed(evt);
             }
         });
-        jPanel1.add(RemoveUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 70, 60));
+        jPanel1.add(RemoveUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 70, 60));
 
-        AddUser.setBackground(new java.awt.Color(51, 51, 51));
         AddUser.setForeground(new java.awt.Color(255, 153, 153));
         AddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AddUser.png"))); // NOI18N
         AddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -78,19 +75,15 @@ public class Hlavne_okno extends javax.swing.JFrame {
                 AddUserActionPerformed(evt);
             }
         });
-        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 70, 60));
+        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 70, 60));
 
-        EditUser.setBackground(new java.awt.Color(51, 51, 51));
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
         EditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditUserActionPerformed(evt);
             }
         });
-        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 70, 60));
-
-        EditLocker.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(EditLocker, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 70, 60));
+        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 70, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 440));
 
@@ -179,7 +172,6 @@ public class Hlavne_okno extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddUser;
-    private javax.swing.JButton EditLocker;
     private javax.swing.JButton EditUser;
     private javax.swing.JLabel PocetSkriniek;
     private javax.swing.JPanel Pozadie1;
