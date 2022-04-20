@@ -5,12 +5,12 @@ public class ConnectionClass {
     public  Connection getConnection(){
 
 
-        String userName="sql11481200";
-        String password="MijD1C4g3d";
+        String USERNAME = "root";
+        String PASSWORD = "";
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11481200",userName,password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/spravca",USERNAME,PASSWORD);
         } 
         catch (Exception e) {
             e.printStackTrace();
