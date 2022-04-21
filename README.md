@@ -5,4 +5,3 @@ Ahoj svet by Guľka
 https://www.youtube.com/watch?v=6K9OpqDM_RM
 
 
-https://www.youtube.com/watch?v=6K9OpqDM_RM
