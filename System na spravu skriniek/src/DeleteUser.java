@@ -24,8 +24,8 @@ public class DeleteUser extends javax.swing.JFrame {
         OK = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         DeletePriezviskoField = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Meno = new javax.swing.JLabel();
+        DeleteMenoField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -34,7 +34,7 @@ public class DeleteUser extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DeletePriezvisko.setText("Priezvisko");
-        jPanel1.add(DeletePriezvisko, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 76, 27));
+        jPanel1.add(DeletePriezvisko, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 76, 30));
 
         GoBack.setBackground(new java.awt.Color(102, 102, 102));
         GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
@@ -43,7 +43,7 @@ public class DeleteUser extends javax.swing.JFrame {
                 GoBackActionPerformed(evt);
             }
         });
-        jPanel1.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 54, 55));
+        jPanel1.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 40));
 
         OK.setBackground(new java.awt.Color(102, 102, 102));
         OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
@@ -52,32 +52,28 @@ public class DeleteUser extends javax.swing.JFrame {
                 OKActionPerformed(evt);
             }
         });
-        jPanel1.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, 56));
+        jPanel1.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 60, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Odstráň žiaka");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 200, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
 
         DeletePriezviskoField.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(DeletePriezviskoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 130, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        DeletePriezviskoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletePriezviskoFieldActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jPanel1.add(DeletePriezviskoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, -1));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, 90));
+        Meno.setText("Meno");
+        jPanel1.add(Meno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -7, 510, 370));
+        DeleteMenoField.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(DeleteMenoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -89,6 +85,10 @@ public class DeleteUser extends javax.swing.JFrame {
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
         close();
     }//GEN-LAST:event_OKActionPerformed
+
+    private void DeletePriezviskoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletePriezviskoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeletePriezviskoFieldActionPerformed
 
    
     public static void main(String args[]) {
@@ -124,13 +124,13 @@ public class DeleteUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DeleteMenoField;
     private javax.swing.JLabel DeletePriezvisko;
     private javax.swing.JTextField DeletePriezviskoField;
     private javax.swing.JButton GoBack;
+    private javax.swing.JLabel Meno;
     private javax.swing.JButton OK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
