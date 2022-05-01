@@ -1,6 +1,8 @@
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 
 
@@ -64,21 +66,28 @@ public class PridajZiaka extends javax.swing.JFrame {
         jLabel5.setToolTipText("");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+
+        GoBack1.setBackground(new java.awt.Color(204, 204, 204));
+=======
         GoBack1.setBackground(new java.awt.Color(102, 102, 102));
+
         GoBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
         GoBack1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GoBack1ActionPerformed(evt);
             }
-        });
 
-        OK1.setBackground(new java.awt.Color(102, 102, 102));
+
+
+        OK1.setBackground(new java.awt.Color(204, 204, 204));
+
+
         OK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
         OK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OK1ActionPerformed(evt);
             }
-        });
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +157,17 @@ public class PridajZiaka extends javax.swing.JFrame {
     }//GEN-LAST:event_GoBack1ActionPerformed
 
     private void OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK1ActionPerformed
+
+          try {
+            Class.forName("com.mysql.jdbc.Driver");
+              Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","mysql@123");
+              //mysql@123 je meno a heslo databazky aby to fungovalo pepegy
+        } 
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
         close();
     }//GEN-LAST:event_OK1ActionPerformed
 

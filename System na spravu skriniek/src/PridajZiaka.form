@@ -177,7 +177,7 @@
         <Component class="javax.swing.JButton" name="GoBack1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Images/GoBack.png"/>
@@ -190,7 +190,11 @@
         <Component class="javax.swing.JButton" name="OK1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+
               <Color blue="66" green="66" red="66" type="rgb"/>
+
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Images/OK.png"/>
