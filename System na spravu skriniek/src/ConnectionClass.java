@@ -2,21 +2,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 public class ConnectionClass {
    public Connection connection;
-    public  Connection getConnection(){
-
-
-        String userName="sql11481200";
-        String password="MijD1C4g3d";
-
+    public Connection getConnection(){
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11481200",userName,password);
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false","root","mysql@123");
+        //mysql@123 je meno a heslo databazky aby to fungovalo pepegy
         } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Expection ee) {
+            System.out.println(ee.getMessage());
+            return connection;
+        }  
 
 
-        return connection;
+
     } 
+
+    
 }
