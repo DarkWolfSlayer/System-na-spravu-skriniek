@@ -3,21 +3,16 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
 
-
-
-
 public class EditUser extends javax.swing.JFrame {
 
  
     public EditUser() {
         initComponents();
     }
-     public void close(){
+    public void close(){
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
-    
-
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,11 +32,7 @@ public class EditUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
-        GoBack.setBackground(new java.awt.Color(204, 204, 204));
-
         GoBack.setBackground(new java.awt.Color(102, 102, 102));
-
         GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
         GoBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,11 +41,7 @@ public class EditUser extends javax.swing.JFrame {
         });
         getContentPane().add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 40));
 
-
-        OK.setBackground(new java.awt.Color(204, 204, 204));
-
         OK.setBackground(new java.awt.Color(102, 102, 102));
-
         OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
         OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,11 +60,11 @@ public class EditUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackActionPerformed
-       close();
+        close();
     }//GEN-LAST:event_GoBackActionPerformed
 
     private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-
+        close();
     }//GEN-LAST:event_OKActionPerformed
 
     
