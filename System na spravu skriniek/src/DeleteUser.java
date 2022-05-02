@@ -26,6 +26,8 @@ public class DeleteUser extends javax.swing.JFrame {
         DeletePriezviskoField = new javax.swing.JTextField();
         Meno = new javax.swing.JLabel();
         DeleteMenoField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        DeleteIDField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,6 +74,12 @@ public class DeleteUser extends javax.swing.JFrame {
 
         DeleteMenoField.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.add(DeleteMenoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, -1));
+
+        jLabel2.setText("ID");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        DeleteIDField.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(DeleteIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 130, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 440));
 
@@ -124,6 +132,7 @@ public class DeleteUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DeleteIDField;
     private javax.swing.JTextField DeleteMenoField;
     private javax.swing.JLabel DeletePriezvisko;
     private javax.swing.JTextField DeletePriezviskoField;
@@ -131,6 +140,7 @@ public class DeleteUser extends javax.swing.JFrame {
     private javax.swing.JLabel Meno;
     private javax.swing.JButton OK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
