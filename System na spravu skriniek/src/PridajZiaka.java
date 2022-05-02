@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class PridajZiaka extends javax.swing.JFrame {
-    ArrayList<String> UlozData = new ArrayList<String>();
+
   
     public PridajZiaka() {
         initComponents();
@@ -156,14 +156,14 @@ public class PridajZiaka extends javax.swing.JFrame {
         String priezvisko = FieldPriezvisko.getText();
         String tel_cislo = FieldTelCislo.getText();
         String id = FieldID.getText();
-
+System.out.println(meno + priezvisko + tel_cislo + id);
         if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id.isEmpty() == false){
-            System.out.println(meno + priezvisko + tel_cislo + id);
+
             try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/spravca","root","");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
 
-                sta.executeUpdate("INSERT INTO spravca (Meno, Priezvisko, Cislo, ID_Ziaka)"
+                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, TelCislo, IDRegister)"
                 +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id+"')");
                 System.out.println(meno + priezvisko + tel_cislo + id);
             }
