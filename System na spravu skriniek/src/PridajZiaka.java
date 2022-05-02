@@ -64,7 +64,7 @@ public class PridajZiaka extends javax.swing.JFrame {
         jLabel5.setToolTipText("");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        GoBack1.setBackground(new java.awt.Color(102, 102, 102));
+        GoBack1.setBackground(new java.awt.Color(204, 204, 204));
         GoBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
         GoBack1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +72,7 @@ public class PridajZiaka extends javax.swing.JFrame {
             }
         });
 
-        OK1.setBackground(new java.awt.Color(102, 102, 102));
+        OK1.setBackground(new java.awt.Color(204, 204, 204));
         OK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
         OK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

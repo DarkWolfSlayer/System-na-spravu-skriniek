@@ -32,7 +32,7 @@ public class EditUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        GoBack.setBackground(new java.awt.Color(102, 102, 102));
+        GoBack.setBackground(new java.awt.Color(204, 204, 204));
         GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
         GoBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,7 +41,7 @@ public class EditUser extends javax.swing.JFrame {
         });
         getContentPane().add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 40));
 
-        OK.setBackground(new java.awt.Color(102, 102, 102));
+        OK.setBackground(new java.awt.Color(204, 204, 204));
         OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
         OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
