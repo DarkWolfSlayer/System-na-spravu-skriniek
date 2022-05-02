@@ -1,6 +1,9 @@
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -148,6 +151,30 @@ public class PridajZiaka extends javax.swing.JFrame {
     }//GEN-LAST:event_GoBack1ActionPerformed
 
     private void OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK1ActionPerformed
+        
+        String meno = FieldMeno.getText();
+        String priezvisko = FieldPriezvisko.getText();
+        String tel_cislo = FieldTelCislo.getText();
+        String id = FieldID.getText();
+
+        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id.isEmpty() == false){
+            System.out.println(meno + priezvisko + tel_cislo + id);
+            try {
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/spravca","root","");
+                Statement sta = connection.createStatement();
+
+                sta.executeUpdate("INSERT INTO spravca (Meno, Priezvisko, Cislo, ID_Ziaka)"
+                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id+"')");
+                System.out.println(meno + priezvisko + tel_cislo + id);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        else {
+
+        }
+
         close();
     }//GEN-LAST:event_OK1ActionPerformed
 
