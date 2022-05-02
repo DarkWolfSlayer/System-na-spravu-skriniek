@@ -16,9 +16,10 @@ public class Hlavne_okno extends javax.swing.JFrame {
     public Hlavne_okno() {
         initComponents();
         Show_Users_In_JTable();
-
+  
     }
-    
+
+ 
     public Connection getConnection()
    {
        Connection con;
@@ -26,6 +27,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
        try {
            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root","");
            return con;
+           
        } 
       catch (Exception e) {
            e.printStackTrace();
@@ -48,7 +50,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
            rs = st.executeQuery(query);
 
            User user;
-
+           
            while(rs.next())
            {
                user = new User(rs.getInt("User_ID"),rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("IDRegister"));
@@ -59,7 +61,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
       catch (Exception e) {
            e.printStackTrace();
        }
-       jTable_Display_Users.repaint();
+
 
        return usersList;
    }
@@ -99,9 +101,9 @@ public class Hlavne_okno extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         Pozadie1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        RemoveUser = new javax.swing.JButton();
         AddUser = new javax.swing.JButton();
         EditUser = new javax.swing.JButton();
+        Refresh = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Display_Users = new javax.swing.JTable();
@@ -135,14 +137,6 @@ public class Hlavne_okno extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        RemoveUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RemoveUser.png"))); // NOI18N
-        RemoveUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RemoveUserActionPerformed(evt);
-            }
-        });
-        jPanel1.add(RemoveUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 70, 60));
-
         AddUser.setForeground(new java.awt.Color(255, 153, 153));
         AddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AddUser.png"))); // NOI18N
         AddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -151,7 +145,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
                 AddUserActionPerformed(evt);
             }
         });
-        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 70, 60));
+        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 70, 60));
 
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
         EditUser.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +153,15 @@ public class Hlavne_okno extends javax.swing.JFrame {
                 EditUserActionPerformed(evt);
             }
         });
-        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 70, 60));
+        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 70, 60));
+
+        Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/refresh.png"))); // NOI18N
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 70, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 440));
 
@@ -184,25 +186,25 @@ public class Hlavne_okno extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Voľné skrinky");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 80, 20));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 80, 20));
 
         jLabel3.setText("Obsadené skrinky");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 100, 20));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 100, 20));
 
         PocetSkriniek.setBackground(new java.awt.Color(255, 255, 255));
         PocetSkriniek.setText("Počet skriniek");
         PocetSkriniek.setToolTipText("");
         PocetSkriniek.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.add(PocetSkriniek, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 90, 20));
+        jPanel2.add(PocetSkriniek, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 90, 20));
 
         jLabel1.setText("jLabel1");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 90, 40));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 90, 40));
 
         jLabel4.setText("jLabel4");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 60, 40));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 60, 40));
 
         jLabel5.setText("jLabel5");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 60, 50));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 60, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 780, 90));
 
@@ -216,15 +218,16 @@ public class Hlavne_okno extends javax.swing.JFrame {
         ziak1.setVisible(true);
     }//GEN-LAST:event_AddUserActionPerformed
 
-    private void RemoveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveUserActionPerformed
-        DeleteUser ziak1 = new DeleteUser();
-        ziak1.setVisible(true);
-    }//GEN-LAST:event_RemoveUserActionPerformed
-
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
         EditUser ziak1 = new EditUser();
         ziak1.setVisible(true);
     }//GEN-LAST:event_EditUserActionPerformed
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) jTable_Display_Users.getModel();
+        dtm.setRowCount(0);
+        Show_Users_In_JTable();
+    }//GEN-LAST:event_RefreshActionPerformed
 
    
     public static void main(String args[]) {
@@ -254,6 +257,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Hlavne_okno().setVisible(true);
             }
         });
@@ -264,7 +268,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
     private javax.swing.JButton EditUser;
     private javax.swing.JLabel PocetSkriniek;
     private javax.swing.JPanel Pozadie1;
-    private javax.swing.JButton RemoveUser;
+    private javax.swing.JButton Refresh;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;

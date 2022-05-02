@@ -20,7 +20,6 @@ public class EditUser extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        GoBack = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Meno = new javax.swing.JLabel();
@@ -33,7 +32,9 @@ public class EditUser extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         FieldTelCislo = new javax.swing.JTextField();
-        OK = new javax.swing.JButton();
+        EditUser = new javax.swing.JButton();
+        GoBack = new javax.swing.JButton();
+        EditUser1 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -43,15 +44,6 @@ public class EditUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        GoBack.setBackground(new java.awt.Color(204, 204, 204));
-        GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
-        GoBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GoBackActionPerformed(evt);
-            }
-        });
-        getContentPane().add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 40));
-
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setForeground(new java.awt.Color(153, 153, 153));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -60,7 +52,7 @@ public class EditUser extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Uprav žiaka");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 200, 40));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 200, 40));
 
         Meno.setText("Meno");
         jPanel2.add(Meno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
@@ -98,7 +90,7 @@ public class EditUser extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 410, 390));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 450, 430));
 
         jLabel4.setText("Telefone číslo");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
@@ -106,16 +98,32 @@ public class EditUser extends javax.swing.JFrame {
         FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
 
-        OK.setBackground(new java.awt.Color(204, 204, 204));
-        OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/OK.png"))); // NOI18N
-        OK.addActionListener(new java.awt.event.ActionListener() {
+        EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
+        EditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OKActionPerformed(evt);
+                EditUserActionPerformed(evt);
             }
         });
-        jPanel2.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 60, 40));
+        jPanel2.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 60, 60));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 430));
+        GoBack.setBackground(new java.awt.Color(204, 204, 204));
+        GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
+        GoBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GoBackActionPerformed(evt);
+            }
+        });
+        jPanel2.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 60, 60));
+
+        EditUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RemoveUser.png"))); // NOI18N
+        EditUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditUser1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 60, 60));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,13 +132,19 @@ public class EditUser extends javax.swing.JFrame {
         close();
     }//GEN-LAST:event_GoBackActionPerformed
 
-    private void OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKActionPerformed
-        close();
-    }//GEN-LAST:event_OKActionPerformed
-
     private void EditPriezviskoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditPriezviskoFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditPriezviskoFieldActionPerformed
+
+    private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
+        EditUser ziak1 = new EditUser();
+        ziak1.setVisible(true);
+    }//GEN-LAST:event_EditUserActionPerformed
+
+    private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
+        EditUser ziak1 = new EditUser();
+        ziak1.setVisible(true);
+    }//GEN-LAST:event_EditUser1ActionPerformed
 
     
     public static void main(String args[]) {
@@ -169,10 +183,11 @@ public class EditUser extends javax.swing.JFrame {
     private javax.swing.JTextField EditIDField;
     private javax.swing.JTextField EditMenoField;
     private javax.swing.JTextField EditPriezviskoField;
+    private javax.swing.JButton EditUser;
+    private javax.swing.JButton EditUser1;
     private javax.swing.JTextField FieldTelCislo;
     private javax.swing.JButton GoBack;
     private javax.swing.JLabel Meno;
-    private javax.swing.JButton OK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

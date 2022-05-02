@@ -156,7 +156,7 @@ public class PridajZiaka extends javax.swing.JFrame {
         String priezvisko = FieldPriezvisko.getText();
         String tel_cislo = FieldTelCislo.getText();
         String id = FieldID.getText();
-System.out.println(meno + priezvisko + tel_cislo + id);
+
         if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id.isEmpty() == false){
 
             try {
@@ -165,7 +165,7 @@ System.out.println(meno + priezvisko + tel_cislo + id);
 
                 sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, TelCislo, IDRegister)"
                 +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id+"')");
-                System.out.println(meno + priezvisko + tel_cislo + id);
+
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
