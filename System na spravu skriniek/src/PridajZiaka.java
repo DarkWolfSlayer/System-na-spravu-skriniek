@@ -68,7 +68,7 @@ public class PridajZiaka extends javax.swing.JFrame {
 
 
         GoBack1.setBackground(new java.awt.Color(204, 204, 204));
-=======
+
         GoBack1.setBackground(new java.awt.Color(102, 102, 102));
 
         GoBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
