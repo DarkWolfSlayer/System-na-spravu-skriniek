@@ -1,7 +1,13 @@
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Hlavne_okno extends javax.swing.JFrame {
@@ -9,7 +15,75 @@ public class Hlavne_okno extends javax.swing.JFrame {
    
     public Hlavne_okno() {
         initComponents();
+        Show_Users_In_JTable();
+
     }
+    
+    public Connection getConnection()
+   {
+       Connection con;
+
+       try {
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root","");
+           return con;
+       } 
+      catch (Exception e) {
+           e.printStackTrace();
+           return null;
+       }
+   }
+    
+    
+    public ArrayList<User> getUsersList()
+   {
+       ArrayList<User> usersList = new ArrayList<User>();
+       Connection connection = getConnection();
+       
+       String query = "SELECT * FROM  `databaza_skriniek` ";
+       Statement st;
+       ResultSet rs;
+       
+       try {
+           st = connection.createStatement();
+           rs = st.executeQuery(query);
+
+           User user;
+
+           while(rs.next())
+           {
+               user = new User(rs.getInt("User_ID"),rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("IDRegister"));
+               usersList.add(user);
+           }
+
+       } 
+      catch (Exception e) {
+           e.printStackTrace();
+       }
+       jTable_Display_Users.repaint();
+
+       return usersList;
+   }
+    
+    
+    
+    public void Show_Users_In_JTable()
+   {
+       ArrayList<User> list = getUsersList();
+       DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
+       Object[] row = new Object[5];
+       for(int i = 0; i < list.size(); i++)
+       {
+           row[0] = list.get(i).getId_poradie();
+           row[1] = list.get(i).getMeno();
+           row[2] = list.get(i).getPriezvisko();
+           row[3] = list.get(i).getTel_cislo();
+           row[4] = list.get(i).getId_user();
+           
+           model.addRow(row);
+       }
+    }
+
+    
     
     
     @SuppressWarnings("unchecked")
@@ -29,6 +103,8 @@ public class Hlavne_okno extends javax.swing.JFrame {
         AddUser = new javax.swing.JButton();
         EditUser = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_Display_Users = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,7 +165,20 @@ public class Hlavne_okno extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 650, 350));
+
+        jTable_Display_Users.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID_skrinka", "Meno", "Priezvisko", "Tel cislo", "ID_usera"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable_Display_Users);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 350));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 780, 350));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,7 +204,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
         jLabel5.setText("jLabel5");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 60, 50));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 650, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 780, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,6 +279,8 @@ public class Hlavne_okno extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable_Display_Users;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
