@@ -54,7 +54,7 @@ public class PridajZiaka extends javax.swing.JFrame {
 
         FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel4.setText("ID");
+        jLabel4.setText("ID_Skrinky");
 
         FieldID.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -91,14 +91,14 @@ public class PridajZiaka extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(FieldPriezvisko)
                     .addComponent(jLabel1)
                     .addComponent(FieldMeno)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FieldTelCislo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(FieldID))
+                    .addComponent(FieldID)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 116, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -130,7 +130,7 @@ public class PridajZiaka extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(GoBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,16 +152,17 @@ public class PridajZiaka extends javax.swing.JFrame {
         String meno = FieldMeno.getText();
         String priezvisko = FieldPriezvisko.getText();
         String tel_cislo = FieldTelCislo.getText();
-        String id = FieldID.getText();
+        String id_skrinka = FieldID.getText();
+        
 
-        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id.isEmpty() == false){
+        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id_skrinka.isEmpty() == false){
 
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
 
-                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, TelCislo, IDRegister)"
-                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id+"')");
+                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, TelCislo, ID_skrinka)"
+                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id_skrinka+"')");
 
             }
             catch (Exception e){

@@ -53,7 +53,7 @@ counter c = new counter();
            
            while(rs.next())
            {
-               user = new User(rs.getInt("User_ID"),rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("IDRegister"));
+               user = new User(rs.getInt("User_ID"), rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("ID_skrinka"));
                usersList.add(user);
            }
 
@@ -72,14 +72,13 @@ counter c = new counter();
    {
        ArrayList<User> list = getUsersList();
        DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
-       Object[] row = new Object[5];
+       Object[] row = new Object[4];
        for(int i = 0; i < list.size(); i++)
        {
-           row[0] = list.get(i).getId_poradie();
-           row[1] = list.get(i).getMeno();
-           row[2] = list.get(i).getPriezvisko();
-           row[3] = list.get(i).getTel_cislo();
-           row[4] = list.get(i).getId_user();
+           row[0] = list.get(i).getMeno();
+           row[1] = list.get(i).getPriezvisko();
+           row[2] = list.get(i).getTel_cislo();
+           row[3] = list.get(i).getId_user();
            
            model.addRow(row);
        }
@@ -171,7 +170,7 @@ counter c = new counter();
 
             },
             new String [] {
-                "ID_skrinka", "Meno", "Priezvisko", "Tel cislo", "ID_usera"
+                "Meno", "Priezvisko", "Tel cislo", "ID_Skrinky"
             }
         ));
         jScrollPane2.setViewportView(jTable_Display_Users);

@@ -14,8 +14,11 @@ public class EditUser extends javax.swing.JFrame {
 
  
     public EditUser() {
+
         initComponents();
         Show_Users_In_JTable();
+
+        
     }
     public Connection getConnection()
    {
@@ -50,7 +53,7 @@ public class EditUser extends javax.swing.JFrame {
            
            while(rs.next())
            {
-               user = new User(rs.getInt("User_ID"),rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("IDRegister"));
+               user = new User(rs.getInt("User_ID"), rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("ID_skrinka"));
                usersList.add(user);
            }
 
@@ -71,11 +74,10 @@ public class EditUser extends javax.swing.JFrame {
        Object[] row = new Object[5];
        for(int i = 0; i < list.size(); i++)
        {
-           row[0] = list.get(i).getId_poradie();
-           row[1] = list.get(i).getMeno();
-           row[2] = list.get(i).getPriezvisko();
-           row[3] = list.get(i).getTel_cislo();
-           row[4] = list.get(i).getId_user();
+           row[0] = list.get(i).getMeno();
+           row[1] = list.get(i).getPriezvisko();
+           row[2] = list.get(i).getTel_cislo();
+           row[3] = list.get(i).getId_user();
            
            model.addRow(row);
        }
@@ -88,7 +90,7 @@ public class EditUser extends javax.swing.JFrame {
            st = con.createStatement();
            if((st.executeUpdate(query)) == 1)
            {
-               // refresh jtable data
+               
                DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
                model.setRowCount(0);
                Show_Users_In_JTable();
@@ -113,10 +115,8 @@ public class EditUser extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Meno = new javax.swing.JLabel();
         DeletePriezvisko = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         EditMenoField = new javax.swing.JTextField();
         EditPriezviskoField = new javax.swing.JTextField();
-        EditIDField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -149,24 +149,18 @@ public class EditUser extends javax.swing.JFrame {
         DeletePriezvisko.setText("Priezvisko");
         jPanel2.add(DeletePriezvisko, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 76, 30));
 
-        jLabel2.setText("ID");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
-
         EditMenoField.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(EditMenoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
 
         EditPriezviskoField.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(EditPriezviskoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, -1));
 
-        EditIDField.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.add(EditIDField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 130, -1));
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID_Skrinka", "Meno", "Priezvisko", "TelCislo", "ID_usera"
+                "Meno", "Priezvisko", "TelCislo", "ID_Skrinka"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,6 +178,7 @@ public class EditUser extends javax.swing.JFrame {
         FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
 
+        EditUser.setBackground(new java.awt.Color(204, 204, 204));
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
         EditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +196,7 @@ public class EditUser extends javax.swing.JFrame {
         });
         jPanel2.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 60, 60));
 
+        EditUser1.setBackground(new java.awt.Color(204, 204, 204));
         EditUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RemoveUser.png"))); // NOI18N
         EditUser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,28 +215,29 @@ public class EditUser extends javax.swing.JFrame {
     }//GEN-LAST:event_GoBackActionPerformed
 
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
-        String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"' WHERE `User_ID` = "+EditIDField.getText();
+        String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"' WHERE `ID_skrinka` = " + idskrinka;
        executeSQlQuery(query);
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
-         String query = "DELETE FROM `databaza_skriniek` WHERE User_ID = "+EditIDField.getText();
+         String query = "DELETE FROM `databaza_skriniek` WHERE ID_skrinka = " + idskrinka;
          executeSQlQuery(query);
     }//GEN-LAST:event_EditUser1ActionPerformed
-
+    String idskrinka;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
           int i = jTable1.getSelectedRow();
 
         TableModel model = jTable1.getModel();
         
          // Display Slected Row In JTexteFields
-        EditIDField.setText(model.getValueAt(i,0).toString());
 
-        EditMenoField.setText(model.getValueAt(i,1).toString());
+        EditMenoField.setText(model.getValueAt(i,0).toString());
 
-        EditPriezviskoField.setText(model.getValueAt(i,2).toString());
+        EditPriezviskoField.setText(model.getValueAt(i,1).toString());
 
-        FieldTelCislo.setText(model.getValueAt(i,3).toString());
+        FieldTelCislo.setText(model.getValueAt(i,2).toString());
+        
+        idskrinka = model.getValueAt(i,3).toString();
     }//GEN-LAST:event_jTable1MouseClicked
 
     
@@ -277,7 +274,6 @@ public class EditUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DeletePriezvisko;
-    private javax.swing.JTextField EditIDField;
     private javax.swing.JTextField EditMenoField;
     private javax.swing.JTextField EditPriezviskoField;
     private javax.swing.JButton EditUser;
@@ -286,7 +282,6 @@ public class EditUser extends javax.swing.JFrame {
     private javax.swing.JButton GoBack;
     private javax.swing.JLabel Meno;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
