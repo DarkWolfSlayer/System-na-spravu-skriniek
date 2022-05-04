@@ -1,11 +1,8 @@
-
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 
 public class PridajZiaka extends javax.swing.JFrame {
 
@@ -171,11 +168,10 @@ public class PridajZiaka extends javax.swing.JFrame {
                 System.out.println(e.getMessage());
             }
         }
-        else {
-
-        }
-
-        close();
+        FieldMeno.setText("");
+        FieldPriezvisko.setText("");
+        FieldTelCislo.setText("");
+        FieldID.setText("");
     }//GEN-LAST:event_OK1ActionPerformed
 
    

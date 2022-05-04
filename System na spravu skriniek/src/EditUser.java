@@ -1,6 +1,13 @@
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 public class EditUser extends javax.swing.JFrame {
@@ -8,7 +15,89 @@ public class EditUser extends javax.swing.JFrame {
  
     public EditUser() {
         initComponents();
+        Show_Users_In_JTable();
     }
+    public Connection getConnection()
+   {
+       Connection con;
+
+       try {
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root","");
+           return con;
+           
+       } 
+      catch (Exception e) {
+           e.printStackTrace();
+           return null;
+       }
+   }
+    
+    
+    public ArrayList<User> getUsersList()
+   {
+       ArrayList<User> usersList = new ArrayList<User>();
+       Connection connection = getConnection();
+       
+       String query = "SELECT * FROM  `databaza_skriniek` ";
+       Statement st;
+       ResultSet rs;
+       
+       try {
+           st = connection.createStatement();
+           rs = st.executeQuery(query);
+
+           User user;
+           
+           while(rs.next())
+           {
+               user = new User(rs.getInt("User_ID"),rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("IDRegister"));
+               usersList.add(user);
+           }
+
+       } 
+      catch (Exception e) {
+           e.printStackTrace();
+       }
+
+
+       return usersList;
+   }
+      
+    
+    public void Show_Users_In_JTable()
+   {
+       ArrayList<User> list = getUsersList();
+       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+       Object[] row = new Object[5];
+       for(int i = 0; i < list.size(); i++)
+       {
+           row[0] = list.get(i).getId_poradie();
+           row[1] = list.get(i).getMeno();
+           row[2] = list.get(i).getPriezvisko();
+           row[3] = list.get(i).getTel_cislo();
+           row[4] = list.get(i).getId_user();
+           
+           model.addRow(row);
+       }
+   }
+       public void executeSQlQuery(String query)
+   {
+       Connection con = getConnection();
+       Statement st;
+       try{
+           st = con.createStatement();
+           if((st.executeUpdate(query)) == 1)
+           {
+               // refresh jtable data
+               DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+               model.setRowCount(0);
+               Show_Users_In_JTable();
+              
+           }
+       }catch(Exception ex){
+           ex.printStackTrace();
+       }
+   }
     public void close(){
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -67,11 +156,6 @@ public class EditUser extends javax.swing.JFrame {
         jPanel2.add(EditMenoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, -1));
 
         EditPriezviskoField.setBackground(new java.awt.Color(204, 204, 204));
-        EditPriezviskoField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditPriezviskoFieldActionPerformed(evt);
-            }
-        });
         jPanel2.add(EditPriezviskoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, -1));
 
         EditIDField.setBackground(new java.awt.Color(204, 204, 204));
@@ -79,15 +163,17 @@ public class EditUser extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID_Skrinka", "Meno", "Priezvisko", "TelCislo", "ID_usera"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 450, 430));
@@ -132,19 +218,30 @@ public class EditUser extends javax.swing.JFrame {
         close();
     }//GEN-LAST:event_GoBackActionPerformed
 
-    private void EditPriezviskoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditPriezviskoFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditPriezviskoFieldActionPerformed
-
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
-        EditUser ziak1 = new EditUser();
-        ziak1.setVisible(true);
+        String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"' WHERE `User_ID` = "+EditIDField.getText();
+       executeSQlQuery(query);
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
-        EditUser ziak1 = new EditUser();
-        ziak1.setVisible(true);
+         String query = "DELETE FROM `databaza_skriniek` WHERE User_ID = "+EditIDField.getText();
+         executeSQlQuery(query);
     }//GEN-LAST:event_EditUser1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+          int i = jTable1.getSelectedRow();
+
+        TableModel model = jTable1.getModel();
+        
+         // Display Slected Row In JTexteFields
+        EditIDField.setText(model.getValueAt(i,0).toString());
+
+        EditMenoField.setText(model.getValueAt(i,1).toString());
+
+        EditPriezviskoField.setText(model.getValueAt(i,2).toString());
+
+        FieldTelCislo.setText(model.getValueAt(i,3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     
     public static void main(String args[]) {

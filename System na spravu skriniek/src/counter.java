@@ -1,38 +1,41 @@
-public class counter {
-    private int pocetskriniek = 20;
-    private int skrinkaobsadena = 0;
-    private int skrinkaprazdna= 0;
-    
-    void setpocetskriniek (int pocetskriniek){
-        this.pocetskriniek = pocetskriniek;
-    }
-    
-    public int getpocetskriniek()
-    {
-        return pocetskriniek;
-    }
-    
-    
-    
-    void skrinkaobsadena (int skrinkaobsadena){
-        this.skrinkaobsadena = skrinkaobsadena;
-    }
-    
-    public int skrinkaobsadena()
-    {
-        return skrinkaobsadena;
-    }
-    
-    
-    
-    
-    void skrinkaprazdna (int skrinkaprazdna){
-        this.skrinkaprazdna = skrinkaprazdna;
-    }
-    
-    public int skrinkaprazdna()
-    {
-        return skrinkaprazdna;
-    }
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class counter {
+    private int obsadene;
+    private int pocet;
+    private int volne;
+    
+    void pocet_skriniek() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
+            Statement sta = connection.createStatement();
+
+            String query = "SELECT COUNT(*) FROM databaza_skriniek";
+
+            ResultSet rs = sta.executeQuery(query);
+            rs.next();
+
+            obsadene = rs.getInt(1);
+            pocet = 50;
+            volne = pocet - obsadene;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    int getPocet(){
+        return pocet;
+    }
+    
+    int getObsadene(){
+        return obsadene;
+    }
+    
+    int getVolne(){
+        return volne;
+    }
 }

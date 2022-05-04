@@ -1,22 +1,22 @@
-
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 
 public class Hlavne_okno extends javax.swing.JFrame {
-
-   
+counter c = new counter();
+  
     public Hlavne_okno() {
         initComponents();
         Show_Users_In_JTable();
-  
+        
+        c.pocet_skriniek();
+        jLabel1.setText(String.valueOf(c.getPocet()));
+        jLabel4.setText(String.valueOf(c.getVolne()));
+        jLabel5.setText(String.valueOf(c.getObsadene()));
     }
 
  
@@ -85,9 +85,7 @@ public class Hlavne_okno extends javax.swing.JFrame {
        }
     }
 
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -227,6 +225,11 @@ public class Hlavne_okno extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable_Display_Users.getModel();
         dtm.setRowCount(0);
         Show_Users_In_JTable();
+        
+        c.pocet_skriniek();
+        jLabel1.setText(String.valueOf(c.getPocet()));
+        jLabel4.setText(String.valueOf(c.getVolne()));
+        jLabel5.setText(String.valueOf(c.getObsadene()));
     }//GEN-LAST:event_RefreshActionPerformed
 
    
