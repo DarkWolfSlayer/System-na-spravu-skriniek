@@ -6,4 +6,4 @@ Ahoj svet by Guľka
 
 https://www.youtube.com/watch?v=yShq71QbVLI
 
-https://www.youtube.com/watch?v=bvnBszIBMeo
+
