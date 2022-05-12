@@ -8,9 +8,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class Hlavne_okno extends javax.swing.JFrame {
 counter c = new counter();
-  
+    
+    
     public Hlavne_okno() {
         initComponents();
+        jTable_Display_Users.setAutoCreateRowSorter(true);
         Show_Users_In_JTable();
         
         c.pocet_skriniek();
@@ -170,7 +172,7 @@ counter c = new counter();
 
             },
             new String [] {
-                "Meno", "Priezvisko", "Tel cislo", "ID_Skrinky"
+                "Meno", "Priezvisko", "Trieda", "ID_Skrinky"
             }
         ));
         jScrollPane2.setViewportView(jTable_Display_Users);

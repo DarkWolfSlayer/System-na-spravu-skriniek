@@ -192,7 +192,7 @@
                   <Table columnCount="4" rowCount="0">
                     <Column editable="true" title="Meno" type="java.lang.Object"/>
                     <Column editable="true" title="Priezvisko" type="java.lang.Object"/>
-                    <Column editable="true" title="Tel cislo" type="java.lang.Object"/>
+                    <Column editable="true" title="Trieda" type="java.lang.Object"/>
                     <Column editable="true" title="ID_Skrinky" type="java.lang.Object"/>
                   </Table>
                 </Property>
