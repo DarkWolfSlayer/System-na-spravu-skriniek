@@ -3,6 +3,7 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class PridajZiaka extends javax.swing.JFrame {
 
@@ -26,12 +27,12 @@ public class PridajZiaka extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         FieldPriezvisko = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        FieldTelCislo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         FieldID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         GoBack1 = new javax.swing.JButton();
         OK1 = new javax.swing.JButton();
+        FieldTrieda = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -50,9 +51,7 @@ public class PridajZiaka extends javax.swing.JFrame {
 
         FieldPriezvisko.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel3.setText("Telefone číslo");
-
-        FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Trieda");
 
         jLabel4.setText("ID_Skrinky");
 
@@ -80,6 +79,9 @@ public class PridajZiaka extends javax.swing.JFrame {
             }
         });
 
+        FieldTrieda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1.AI", "2.AI", "3.AI", "4.AI" }));
+        FieldTrieda.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,20 +91,21 @@ public class PridajZiaka extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(FieldPriezvisko)
-                    .addComponent(jLabel1)
-                    .addComponent(FieldMeno)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FieldTelCislo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(FieldID)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 116, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(GoBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(GoBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(FieldTrieda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3)
+                            .addComponent(FieldPriezvisko, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(FieldMeno)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FieldID)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(OK1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -125,12 +128,12 @@ public class PridajZiaka extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FieldTelCislo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FieldTrieda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(GoBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,31 +151,37 @@ public class PridajZiaka extends javax.swing.JFrame {
     }//GEN-LAST:event_GoBack1ActionPerformed
 
     private void OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK1ActionPerformed
-        
         String meno = FieldMeno.getText();
         String priezvisko = FieldPriezvisko.getText();
-        String tel_cislo = FieldTelCislo.getText();
+        String trieda = (String)FieldTrieda.getSelectedItem();
         String id_skrinka = FieldID.getText();
         
+        
+        
 
-        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && tel_cislo.isEmpty() == false && id_skrinka.isEmpty() == false){
-
+        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && id_skrinka.isEmpty() == false){
+            
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
 
-                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, TelCislo, ID_skrinka)"
-                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+tel_cislo+"', '"+id_skrinka+"')");
+                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, trieda, ID_skrinka)"
+                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
+                
+                FieldMeno.setText("");
+                FieldPriezvisko.setText("");
+                FieldID.setText("");
 
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
             }
         }
-        FieldMeno.setText("");
-        FieldPriezvisko.setText("");
-        FieldTelCislo.setText("");
-        FieldID.setText("");
+        else{
+             JOptionPane.showMessageDialog(this,"Dodzigal si mi program chuju");  
+        
+        }
+
     }//GEN-LAST:event_OK1ActionPerformed
 
    
@@ -212,7 +221,7 @@ public class PridajZiaka extends javax.swing.JFrame {
     private javax.swing.JTextField FieldID;
     private javax.swing.JTextField FieldMeno;
     private javax.swing.JTextField FieldPriezvisko;
-    private javax.swing.JTextField FieldTelCislo;
+    private javax.swing.JComboBox<String> FieldTrieda;
     private javax.swing.JButton GoBack1;
     private javax.swing.JButton OK1;
     private javax.swing.JLabel jLabel1;
