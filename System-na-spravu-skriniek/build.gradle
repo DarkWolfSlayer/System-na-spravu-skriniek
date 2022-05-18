@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'application'
+
+mainClassName = 'com.kingaspx.firebase.Main'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation     'junit:junit:4.13'
+
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
+
+    implementation files('libs/KControls.jar', 'libs/AbsoluteLayout.jar')
+}
+
+
