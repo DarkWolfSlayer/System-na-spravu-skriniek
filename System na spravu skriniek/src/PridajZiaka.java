@@ -164,13 +164,19 @@ public class PridajZiaka extends javax.swing.JFrame {
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
-
+                
+                String skrinkaFull = ("SELECT ID_skrinka FROM databaza_skriniek WHERE ID_skrinka = '"+id_skrinka+"'");
+                if(skrinkaFull == id_skrinka){
                 sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, trieda, ID_skrinka)"
                 +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
                 
                 FieldMeno.setText("");
                 FieldPriezvisko.setText("");
                 FieldID.setText("");
+                }
+                else if(skrinkaFull != id_skrinka){
+                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena");  
+                }
 
             }
             catch (Exception e){
