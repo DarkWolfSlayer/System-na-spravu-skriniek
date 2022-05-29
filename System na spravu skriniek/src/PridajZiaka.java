@@ -2,6 +2,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -79,8 +80,14 @@ public class PridajZiaka extends javax.swing.JFrame {
             }
         });
 
+        FieldTrieda.setBackground(new java.awt.Color(204, 204, 204));
         FieldTrieda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1.AI", "2.AI", "3.AI", "4.AI" }));
         FieldTrieda.setToolTipText("");
+        FieldTrieda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldTriedaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,7 +160,7 @@ public class PridajZiaka extends javax.swing.JFrame {
     private void OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK1ActionPerformed
         String meno = FieldMeno.getText();
         String priezvisko = FieldPriezvisko.getText();
-        String trieda = (String)FieldTrieda.getSelectedItem();
+        String trieda = FieldTrieda.getSelectedItem().toString();
         String id_skrinka = FieldID.getText();
         
         
@@ -165,17 +172,30 @@ public class PridajZiaka extends javax.swing.JFrame {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
                 
-                String skrinkaFull = ("SELECT ID_skrinka FROM databaza_skriniek WHERE ID_skrinka = '"+id_skrinka+"'");
-                if(skrinkaFull == id_skrinka){
-                sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, trieda, ID_skrinka)"
-                +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
+                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '"+id_skrinka+"'");
                 
-                FieldMeno.setText("");
-                FieldPriezvisko.setText("");
-                FieldID.setText("");
-                }
-                else if(skrinkaFull != id_skrinka){
+                ResultSet rs = sta.executeQuery(skrinkaFull);
+                
+                if(rs.next()){
+                
                     JOptionPane.showMessageDialog(this,"Skrinka už je pridelena");  
+
+                                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                else{
+                    sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, telCislo, ID_skrinka)"
+                    +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
+
+                    FieldMeno.setText("");
+                    FieldPriezvisko.setText("");
+                    FieldID.setText("");
                 }
 
             }
@@ -189,6 +209,10 @@ public class PridajZiaka extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_OK1ActionPerformed
+
+    private void FieldTriedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldTriedaActionPerformed
+        String trieda = FieldTrieda.getSelectedItem().toString();
+    }//GEN-LAST:event_FieldTriedaActionPerformed
 
    
     public static void main(String args[]) {

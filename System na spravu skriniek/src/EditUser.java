@@ -124,6 +124,7 @@ public class EditUser extends javax.swing.JFrame {
         EditUser = new javax.swing.JButton();
         GoBack = new javax.swing.JButton();
         EditUser1 = new javax.swing.JButton();
+        trieda = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -172,11 +173,11 @@ public class EditUser extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 450, 430));
 
-        jLabel4.setText("Telefone číslo");
+        jLabel4.setText("Trieda");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
+        jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 130, -1));
 
         EditUser.setBackground(new java.awt.Color(204, 204, 204));
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
@@ -204,6 +205,10 @@ public class EditUser extends javax.swing.JFrame {
             }
         });
         jPanel2.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 60, 60));
+
+        trieda.setBackground(new java.awt.Color(204, 204, 204));
+        trieda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(trieda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
@@ -288,5 +293,6 @@ public class EditUser extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> trieda;
     // End of variables declaration//GEN-END:variables
 }
