@@ -1,4 +1,5 @@
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -6,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -225,17 +227,36 @@ counter c = new counter();
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
-        String query = "DELETE FROM `databaza_skriniek` WHERE ID_skrinka = " + idskrinka;
-        executeSQlQuery(query);
+        
+          int[] rows = jTable1.getSelectedRows();
+        int a = JOptionPane.showConfirmDialog((Component) null, "Chces to vazne vymazat?", "DELETE", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            for (int i = 0; i < rows.length; i++) {
+                String bmdel = jTable1.getModel().getValueAt(rows[i], 3).toString();
+
+                try {
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
+                    Statement stmt = conn.createStatement();
+                    String query = "DELETE FROM databaza_skriniek WHERE ID_skrinka = '" + bmdel + "'";
+                    stmt.executeUpdate(query);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        Show_Users_In_JTable();
+        
     }//GEN-LAST:event_EditUser1ActionPerformed
-    String idskrinka;
+        String idskrinka; 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
           int i = jTable1.getSelectedRow();
-
+          
+          
         TableModel model = jTable1.getModel();
-        
-         // Display Slected Row In JTexteFields
-
+         // Display Slected Row In JTexteFields  
         EditMenoField.setText(model.getValueAt(i,0).toString());
 
         EditPriezviskoField.setText(model.getValueAt(i,1).toString());
@@ -243,7 +264,7 @@ counter c = new counter();
         FieldTelCislo.setText(model.getValueAt(i,2).toString());
         
         idskrinka = model.getValueAt(i,3).toString();
-        
+       
     }//GEN-LAST:event_jTable1MouseClicked
 
     
@@ -272,6 +293,7 @@ counter c = new counter();
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new EditUser().setVisible(true);
             }
