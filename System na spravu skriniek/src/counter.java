@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,12 +20,13 @@ public class counter {
 
             obsadene = rs.getInt(1);
             pocet = 50;
+
             volne = pocet - obsadene;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
     int getPocet(){
         return pocet;
     }

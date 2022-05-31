@@ -11,7 +11,7 @@ import javax.swing.table.TableModel;
 
 
 public class EditUser extends javax.swing.JFrame {
-
+counter c = new counter();
  
     public EditUser() {
 
@@ -221,12 +221,12 @@ public class EditUser extends javax.swing.JFrame {
 
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
         String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"' WHERE `ID_skrinka` = " + idskrinka;
-       executeSQlQuery(query);
+        executeSQlQuery(query);
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
-         String query = "DELETE FROM `databaza_skriniek` WHERE ID_skrinka = " + idskrinka;
-         executeSQlQuery(query);
+        String query = "DELETE FROM `databaza_skriniek` WHERE ID_skrinka = " + idskrinka;
+        executeSQlQuery(query);
     }//GEN-LAST:event_EditUser1ActionPerformed
     String idskrinka;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -243,6 +243,7 @@ public class EditUser extends javax.swing.JFrame {
         FieldTelCislo.setText(model.getValueAt(i,2).toString());
         
         idskrinka = model.getValueAt(i,3).toString();
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     

@@ -16,6 +16,7 @@ counter c = new counter();
         Show_Users_In_JTable();
         
         c.pocet_skriniek();
+        
         jLabel1.setText(String.valueOf(c.getPocet()));
         jLabel4.setText(String.valueOf(c.getVolne()));
         jLabel5.setText(String.valueOf(c.getObsadene()));

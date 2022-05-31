@@ -7,10 +7,11 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class PridajZiaka extends javax.swing.JFrame {
-
+counter c = new counter();
   
     public PridajZiaka() {
         initComponents();
+        
     }
 
     public void close(){
@@ -162,10 +163,11 @@ public class PridajZiaka extends javax.swing.JFrame {
         String priezvisko = FieldPriezvisko.getText();
         String trieda = FieldTrieda.getSelectedItem().toString();
         String id_skrinka = FieldID.getText();
-        
-        
-        
-
+        c.pocet_skriniek();
+        int pocet = c.getPocet();
+        int obsadene = c.getObsadene();
+        int volne = c.getVolne();
+                
         if(meno.isEmpty() == false && priezvisko.isEmpty() == false && id_skrinka.isEmpty() == false){
             
             try {
@@ -177,25 +179,22 @@ public class PridajZiaka extends javax.swing.JFrame {
                 ResultSet rs = sta.executeQuery(skrinkaFull);
                 
                 if(rs.next()){
-                
-                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena");  
-
-                                        
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena");      
                 }
-                else{
-                    sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, telCislo, ID_skrinka)"
-                    +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
+                else{                    
+                    if(obsadene >= pocet){
+                        obsadene = obsadene - 1;
+                        JOptionPane.showMessageDialog(this,"Už nie sú voľné skrinky"); 
+                    }
+                    
+                    else{
+                        sta.executeUpdate("INSERT INTO databaza_skriniek (Meno, Priezvisko, telCislo, ID_skrinka)"
+                        +"VALUES ('"+meno+"', '"+priezvisko+"', '"+trieda+"', '"+id_skrinka+"')");
 
-                    FieldMeno.setText("");
-                    FieldPriezvisko.setText("");
-                    FieldID.setText("");
+                        FieldMeno.setText("");
+                        FieldPriezvisko.setText("");
+                        FieldID.setText("");
+                    }  
                 }
 
             }
