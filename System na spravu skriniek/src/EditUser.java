@@ -1,3 +1,4 @@
+
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -10,104 +11,93 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 public class EditUser extends javax.swing.JFrame {
-counter c = new counter();
- 
+
+    counter c = new counter();
+
     public EditUser() {
 
         initComponents();
         Show_Users_In_JTable();
         jTable_Display_Users.setAutoCreateRowSorter(true);
 
-
-        
     }
-    public Connection getConnection()
-   {
-       Connection con;
 
-       try {
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root","");
-           return con;
-           
-       } 
-      catch (Exception e) {
-           e.printStackTrace();
-           return null;
-       }
-   }
-    
-    
-    public ArrayList<User> getUsersList()
-   {
-       ArrayList<User> usersList = new ArrayList<User>();
-       Connection connection = getConnection();
-       
-       String query = "SELECT * FROM  `databaza_skriniek` ";
-       Statement st;
-       ResultSet rs;
-       
-       try {
-           st = connection.createStatement();
-           rs = st.executeQuery(query);
+    public Connection getConnection() {
+        Connection con;
 
-           User user;
-           
-           while(rs.next())
-           {
-               user = new User(rs.getInt("User_ID"), rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("ID_skrinka"));
-               usersList.add(user);
-           }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
+            return con;
 
-       } 
-      catch (Exception e) {
-           e.printStackTrace();
-       }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public ArrayList<User> getUsersList() {
+        ArrayList<User> usersList = new ArrayList<User>();
+        Connection connection = getConnection();
 
-       return usersList;
-   }
-      
-    
-    public void Show_Users_In_JTable()
-   {
-       ArrayList<User> list = getUsersList();
-       DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
-       Object[] row = new Object[5];
-       for(int i = 0; i < list.size(); i++)
-       {
-           row[0] = list.get(i).getMeno();
-           row[1] = list.get(i).getPriezvisko();
-           row[2] = list.get(i).getTel_cislo();
-           row[3] = list.get(i).getId_user();
-           
-           model.addRow(row);
-       }
-   }
-       public void executeSQlQuery(String query)
-   {
-       Connection con = getConnection();
-       Statement st;
-       try{
-           st = con.createStatement();
-           if((st.executeUpdate(query)) == 1)
-           {
-               
-               DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
-               model.setRowCount(0);
-               Show_Users_In_JTable();
-              
-           }
-       }catch(Exception ex){
-           ex.printStackTrace();
-       }
-   }
-    public void close(){
+        String query = "SELECT * FROM  `databaza_skriniek` ";
+        Statement st;
+        ResultSet rs;
+
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+
+            User user;
+
+            while (rs.next()) {
+                user = new User(rs.getInt("User_ID"), rs.getString("Meno"), rs.getString("Priezvisko"), rs.getString("TelCislo"), rs.getString("ID_skrinka"));
+                usersList.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
+    }
+
+    public void Show_Users_In_JTable() {
+        ArrayList<User> list = getUsersList();
+        DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+        Object[] row = new Object[5];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMeno();
+            row[1] = list.get(i).getPriezvisko();
+            row[2] = list.get(i).getTel_cislo();
+            row[3] = list.get(i).getId_user();
+
+            model.addRow(row);
+        }
+    }
+
+    public void executeSQlQuery(String query) {
+        Connection con = getConnection();
+        Statement st;
+        try {
+            st = con.createStatement();
+            if ((st.executeUpdate(query)) == 1) {
+
+                DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+                model.setRowCount(0);
+                Show_Users_In_JTable();
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -220,47 +210,41 @@ counter c = new counter();
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
         String meno = EditMenoField.getText();
         String priezvisko = EditPriezviskoField.getText();
-        String trieda = FieldTelCislo.getText(); 
-  
-        
-        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && trieda.isEmpty() == false){
+        String trieda = FieldTelCislo.getText();
 
-        try {
-                
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
+        if (meno.isEmpty() == false && priezvisko.isEmpty() == false && trieda.isEmpty() == false) {
+
+            try {
+
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
                 Statement sta = connection.createStatement();
-                
-                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '"+fekete+"'");
-                
+
+                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '" + idskrinka + "'");
+
                 ResultSet rs = sta.executeQuery(skrinkaFull);
-                
 
-                   String query = "UPDATE databaza_skriniek SET Meno='"+EditMenoField.getText()+"',Priezvisko='"+EditPriezviskoField.getText()+
-                    "',TelCislo='"+FieldTelCislo.getText()+"' WHERE ID_skrinka = " + fekete;
-                    executeSQlQuery(query);
-                    
-                    DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
-                    model.setRowCount(0);
-                    Show_Users_In_JTable();
-                
-                
+                String query = "UPDATE databaza_skriniek SET Meno='" + EditMenoField.getText() + "',Priezvisko='" + EditPriezviskoField.getText()
+                        + "',TelCislo='" + FieldTelCislo.getText() + "' WHERE ID_skrinka = " + idskrinka;
+                executeSQlQuery(query);
 
-            }
-            catch (Exception e){
+                DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+                model.setRowCount(0);
+                Show_Users_In_JTable();
+
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
- }
-             else{
-             JOptionPane.showMessageDialog(this,"Nezadal si všetky hodnoty");  
-        
+        } else {
+            JOptionPane.showMessageDialog(this, "Nezadal si všetky hodnoty");
+
         }
-        
-        
+
+
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
-        
-          int[] rows = jTable_Display_Users.getSelectedRows();
+
+        int[] rows = jTable_Display_Users.getSelectedRows();
         int a = JOptionPane.showConfirmDialog((Component) null, "Chces to vazne vymazat?", "DELETE", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
             for (int i = 0; i < rows.length; i++) {
@@ -271,7 +255,8 @@ counter c = new counter();
                     Statement stmt = conn.createStatement();
                     String query = "DELETE FROM databaza_skriniek WHERE ID_skrinka = '" + bmdel + "'";
                     stmt.executeUpdate(query);
-                } catch (Exception e) {
+                } 
+                catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
 
@@ -280,30 +265,27 @@ counter c = new counter();
         DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
         model.setRowCount(0);
         Show_Users_In_JTable();
-        
+
     }//GEN-LAST:event_EditUser1ActionPerformed
-    String fekete;
-    String idskrinkaField;
+
+    String idskrinka;
     private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Display_UsersMouseClicked
-          int i = jTable_Display_Users.getSelectedRow();
-          
-          
+        int i = jTable_Display_Users.getSelectedRow();
+
         TableModel model = jTable_Display_Users.getModel();
-         // Display Slected Row In JTexteFields  
-        EditMenoField.setText(model.getValueAt(i,0).toString());
 
-        EditPriezviskoField.setText(model.getValueAt(i,1).toString());
+        EditMenoField.setText(model.getValueAt(i, 0).toString());
 
-        FieldTelCislo.setText(model.getValueAt(i,2).toString());
-        
+        EditPriezviskoField.setText(model.getValueAt(i, 1).toString());
 
-        fekete = model.getValueAt(i,3).toString();
-       
+        FieldTelCislo.setText(model.getValueAt(i, 2).toString());
+
+        idskrinka = model.getValueAt(i, 3).toString();
+
     }//GEN-LAST:event_jTable_Display_UsersMouseClicked
 
-    
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

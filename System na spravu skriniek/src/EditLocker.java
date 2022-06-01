@@ -176,7 +176,7 @@ public class EditLocker extends javax.swing.JFrame {
 
         FieldCisloSkrinky.setText(model.getValueAt(i, 3).toString());
 
-        fekete = model.getValueAt(i, 3).toString();
+        
         meno = model.getValueAt(i, 0).toString();
         priezvisko = model.getValueAt(i, 1).toString();
         trieda = model.getValueAt(i, 2).toString();
@@ -198,7 +198,8 @@ public class EditLocker extends javax.swing.JFrame {
                 if (rs.next()) {
                     JOptionPane.showMessageDialog(this, "Skrinka už je pridelena");
 
-                } else {
+                } 
+                else {
                     String query = "UPDATE databaza_skriniek SET ID_skrinka='" + FieldCisloSkrinky.getText() + "' WHERE Meno = '" + meno + "' "
                             + "AND Priezvisko = '" + priezvisko + "' AND TelCislo = '" + trieda + "'";
                     executeSQlQuery(query);
