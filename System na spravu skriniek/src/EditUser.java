@@ -1,4 +1,3 @@
-
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -19,6 +18,8 @@ counter c = new counter();
 
         initComponents();
         Show_Users_In_JTable();
+        jTable_Display_Users.setAutoCreateRowSorter(true);
+
 
         
     }
@@ -72,7 +73,7 @@ counter c = new counter();
     public void Show_Users_In_JTable()
    {
        ArrayList<User> list = getUsersList();
-       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+       DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
        Object[] row = new Object[5];
        for(int i = 0; i < list.size(); i++)
        {
@@ -93,7 +94,7 @@ counter c = new counter();
            if((st.executeUpdate(query)) == 1)
            {
                
-               DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+               DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
                model.setRowCount(0);
                Show_Users_In_JTable();
               
@@ -120,13 +121,14 @@ counter c = new counter();
         EditMenoField = new javax.swing.JTextField();
         EditPriezviskoField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Display_Users = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         FieldTelCislo = new javax.swing.JTextField();
         EditUser = new javax.swing.JButton();
         GoBack = new javax.swing.JButton();
         EditUser1 = new javax.swing.JButton();
-        trieda = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        idskrinka = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -158,20 +160,20 @@ counter c = new counter();
         EditPriezviskoField.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.add(EditPriezviskoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Display_Users.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Meno", "Priezvisko", "TelCislo", "ID_Skrinka"
+                "Meno", "Priezvisko", "Trieda", "ID_Skrinka"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_Display_Users.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTable_Display_UsersMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_Display_Users);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 450, 430));
 
@@ -179,7 +181,7 @@ counter c = new counter();
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         FieldTelCislo.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 130, -1));
+        jPanel2.add(FieldTelCislo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
 
         EditUser.setBackground(new java.awt.Color(204, 204, 204));
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
@@ -208,9 +210,11 @@ counter c = new counter();
         });
         jPanel2.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 60, 60));
 
-        trieda.setBackground(new java.awt.Color(204, 204, 204));
-        trieda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(trieda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 130, -1));
+        jLabel2.setText("ID_Skrinka");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
+
+        idskrinka.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.add(idskrinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 130, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
@@ -222,17 +226,47 @@ counter c = new counter();
     }//GEN-LAST:event_GoBackActionPerformed
 
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
-        String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"' WHERE `ID_skrinka` = " + idskrinka;
-        executeSQlQuery(query);
+           try {
+                  idskrinkaField = idskrinka.toString();
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
+                Statement sta = connection.createStatement();
+                
+                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '"+idskrinkaField+"'");
+                
+                ResultSet rs = sta.executeQuery(skrinkaFull);
+                
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena"); 
+                    
+                }
+                else{                    
+
+                   //    String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+
+                    //   EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"',`ID_skrinka`='"+idskrinka.getText()+"' WHERE `ID_skrinka` = " + fekete;
+                    //   executeSQlQuery(query);
+
+                       
+                         sta.executeUpdate("UPDATE databaza_skriniek SET (Meno, Priezvisko, telCislo, ID_skrinka)"
+                         +"VALUES ('"+EditMenoField.getText()+"', '"+EditPriezviskoField.getText()+"', '"+FieldTelCislo.getText()+"', '"+idskrinka.getText()+"') WHERE ID_skrinka = " + fekete);
+                }
+
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+                                                  
+           
+     
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
         
-          int[] rows = jTable1.getSelectedRows();
+          int[] rows = jTable_Display_Users.getSelectedRows();
         int a = JOptionPane.showConfirmDialog((Component) null, "Chces to vazne vymazat?", "DELETE", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
             for (int i = 0; i < rows.length; i++) {
-                String bmdel = jTable1.getModel().getValueAt(rows[i], 3).toString();
+                String bmdel = jTable_Display_Users.getModel().getValueAt(rows[i], 3).toString();
 
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
@@ -245,17 +279,18 @@ counter c = new counter();
 
             }
         }
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
         model.setRowCount(0);
         Show_Users_In_JTable();
         
     }//GEN-LAST:event_EditUser1ActionPerformed
-        String idskrinka; 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-          int i = jTable1.getSelectedRow();
+    String fekete;
+    String idskrinkaField;
+    private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Display_UsersMouseClicked
+          int i = jTable_Display_Users.getSelectedRow();
           
           
-        TableModel model = jTable1.getModel();
+        TableModel model = jTable_Display_Users.getModel();
          // Display Slected Row In JTexteFields  
         EditMenoField.setText(model.getValueAt(i,0).toString());
 
@@ -263,9 +298,10 @@ counter c = new counter();
 
         FieldTelCislo.setText(model.getValueAt(i,2).toString());
         
-        idskrinka = model.getValueAt(i,3).toString();
+        idskrinka.setText(model.getValueAt(i,3).toString());
+        fekete = model.getValueAt(i,3).toString();
        
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jTable_Display_UsersMouseClicked
 
     
     public static void main(String args[]) {
@@ -309,13 +345,14 @@ counter c = new counter();
     private javax.swing.JTextField FieldTelCislo;
     private javax.swing.JButton GoBack;
     private javax.swing.JLabel Meno;
+    private javax.swing.JTextField idskrinka;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Display_Users;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JComboBox<String> trieda;
     // End of variables declaration//GEN-END:variables
 }
