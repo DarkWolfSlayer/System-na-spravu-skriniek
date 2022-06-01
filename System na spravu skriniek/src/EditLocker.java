@@ -1,6 +1,7 @@
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import static java.lang.Short.valueOf;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,103 +11,89 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 public class EditLocker extends javax.swing.JFrame {
 
-    
     public EditLocker() {
         initComponents();
         Show_Users_In_JTable();
         jTable_Display_Users.setAutoCreateRowSorter(true);
     }
-     public Connection getConnection()
-   {
-       Connection con;
 
-       try {
-           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root","");
-           return con;
-           
-       } 
-      catch (Exception e) {
-           e.printStackTrace();
-           return null;
-       }
-   }
-     
-     public ArrayList<User> getUsersList()
-   {
-       ArrayList<User> usersList = new ArrayList<User>();
-       Connection connection = getConnection();
-       
-       String query = "SELECT * FROM  `databaza_skriniek` ";
-       Statement st;
-       ResultSet rs;
-       
-       try {
-           st = connection.createStatement();
-           rs = st.executeQuery(query);
+    public Connection getConnection() {
+        Connection con;
 
-           User user;
-           
-           while(rs.next())
-           {
-               user = new User(rs.getInt("User_ID"), rs.getString("Meno"),rs.getString("Priezvisko"),rs.getString("TelCislo"),rs.getString("ID_skrinka"));
-               usersList.add(user);
-           }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
+            return con;
 
-       } 
-      catch (Exception e) {
-           e.printStackTrace();
-       }
-
-
-       return usersList;
-   }
-     
-     
-     public void Show_Users_In_JTable()
-   {
-       ArrayList<User> list = getUsersList();
-       DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
-       Object[] row = new Object[5];
-       for(int i = 0; i < list.size(); i++)
-       {
-           row[0] = list.get(i).getMeno();
-           row[1] = list.get(i).getPriezvisko();
-           row[2] = list.get(i).getTel_cislo();
-           row[3] = list.get(i).getId_user();
-           
-           model.addRow(row);
-       }
-   }
-       public void executeSQlQuery(String query)
-   {
-       Connection con = getConnection();
-       Statement st;
-       try{
-           st = con.createStatement();
-           if((st.executeUpdate(query)) == 1)
-           {
-               
-               DefaultTableModel model = (DefaultTableModel)jTable_Display_Users.getModel();
-               model.setRowCount(0);
-               Show_Users_In_JTable();
-              
-           }
-       }catch(Exception ex){
-           ex.printStackTrace();
-       }
-   }
-       
-       
-       
-       public void close(){
-        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-        
-    
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
+    public ArrayList<User> getUsersList() {
+        ArrayList<User> usersList = new ArrayList<User>();
+        Connection connection = getConnection();
+
+        String query = "SELECT * FROM  `databaza_skriniek` ";
+        Statement st;
+        ResultSet rs;
+
+        try {
+            st = connection.createStatement();
+            rs = st.executeQuery(query);
+
+            User user;
+
+            while (rs.next()) {
+                user = new User(rs.getInt("User_ID"), rs.getString("Meno"), rs.getString("Priezvisko"), rs.getString("TelCislo"), rs.getString("ID_skrinka"));
+                usersList.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usersList;
+    }
+
+    public void Show_Users_In_JTable() {
+        ArrayList<User> list = getUsersList();
+        DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+        Object[] row = new Object[5];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getMeno();
+            row[1] = list.get(i).getPriezvisko();
+            row[2] = list.get(i).getTel_cislo();
+            row[3] = list.get(i).getId_user();
+
+            model.addRow(row);
+        }
+    }
+
+    public void executeSQlQuery(String query) {
+        Connection con = getConnection();
+        Statement st;
+        try {
+            st = con.createStatement();
+            if ((st.executeUpdate(query)) == 1) {
+
+                DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+                model.setRowCount(0);
+                Show_Users_In_JTable();
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void close() {
+        this.dispose();
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -181,65 +168,64 @@ public class EditLocker extends javax.swing.JFrame {
     String fekete;
     String meno;
     String priezvisko;
-    String trieda;       
+    String trieda;
     private void jTable_Display_UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_Display_UsersMouseClicked
         int i = jTable_Display_Users.getSelectedRow();
 
         TableModel model = jTable_Display_Users.getModel();
-      
-        FieldCisloSkrinky.setText(model.getValueAt(i,3).toString());
 
-        
+        FieldCisloSkrinky.setText(model.getValueAt(i, 3).toString());
 
-        fekete = model.getValueAt(i,3).toString();
-        meno = model.getValueAt(i,0).toString();
-        priezvisko = model.getValueAt(i,1).toString();
-        trieda = model.getValueAt(i,2).toString();
+        fekete = model.getValueAt(i, 3).toString();
+        meno = model.getValueAt(i, 0).toString();
+        priezvisko = model.getValueAt(i, 1).toString();
+        trieda = model.getValueAt(i, 2).toString();
 
     }//GEN-LAST:event_jTable_Display_UsersMouseClicked
 
     private void DoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneActionPerformed
-         String skrinka = FieldCisloSkrinky.getText(); 
-        if(skrinka.isEmpty() == false){
-        try {
-                
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
+        String skrinka = FieldCisloSkrinky.getText();
+        if (skrinka.isEmpty() == false) {
+            if(valueOf(skrinka) <= 50 && valueOf(skrinka) > 0){
+            try {
+
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek", "root", "");
                 Statement sta = connection.createStatement();
-                
+
                 String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = " + FieldCisloSkrinky.getText());
-                
+
                 ResultSet rs = sta.executeQuery(skrinkaFull);
-                if(rs.next()){
-                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena"); 
-                     
-                } 
-                else{
-                   String query = "UPDATE databaza_skriniek SET ID_skrinka='"+FieldCisloSkrinky.getText()+"' WHERE Meno = '"+meno+"' "
-                        + "AND Priezvisko = '"+priezvisko+"' AND TelCislo = '"+trieda+"'";
-                   executeSQlQuery(query);
-                    
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(this, "Skrinka už je pridelena");
+
+                } else {
+                    String query = "UPDATE databaza_skriniek SET ID_skrinka='" + FieldCisloSkrinky.getText() + "' WHERE Meno = '" + meno + "' "
+                            + "AND Priezvisko = '" + priezvisko + "' AND TelCislo = '" + trieda + "'";
+                    executeSQlQuery(query);
+
                     DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
                     model.setRowCount(0);
                     Show_Users_In_JTable();
                 }
-                
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
- }
-             else{
-             JOptionPane.showMessageDialog(this,"Nezadal si všetky hodnoty");  
-        
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Čislo skrinky môže byť od 0 do 50");  
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Nezadal si všetky hodnoty");
+
         }
-        
-       
+
+
     }//GEN-LAST:event_DoneActionPerformed
 
     private void GoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackActionPerformed
         close();
-        
+
     }//GEN-LAST:event_GoBackActionPerformed
 
     /**

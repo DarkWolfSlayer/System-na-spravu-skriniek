@@ -1,5 +1,6 @@
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import static java.lang.Short.valueOf;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -169,7 +170,7 @@ counter c = new counter();
         int volne = c.getVolne();
                 
         if(meno.isEmpty() == false && priezvisko.isEmpty() == false && id_skrinka.isEmpty() == false){
-            
+            if(valueOf(id_skrinka) <= 50 && valueOf(id_skrinka) > 0){
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
@@ -201,6 +202,10 @@ counter c = new counter();
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
+            }
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Čislo skrinky môže byť od 0 do 50");  
             }
         }
         else{
