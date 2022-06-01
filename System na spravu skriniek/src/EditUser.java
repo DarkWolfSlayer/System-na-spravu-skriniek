@@ -127,8 +127,6 @@ counter c = new counter();
         EditUser = new javax.swing.JButton();
         GoBack = new javax.swing.JButton();
         EditUser1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        idskrinka = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -190,7 +188,7 @@ counter c = new counter();
                 EditUserActionPerformed(evt);
             }
         });
-        jPanel2.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 60, 60));
+        jPanel2.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 60, 60));
 
         GoBack.setBackground(new java.awt.Color(204, 204, 204));
         GoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoBack.png"))); // NOI18N
@@ -199,7 +197,7 @@ counter c = new counter();
                 GoBackActionPerformed(evt);
             }
         });
-        jPanel2.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 60, 60));
+        jPanel2.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 60, 60));
 
         EditUser1.setBackground(new java.awt.Color(204, 204, 204));
         EditUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RemoveUser.png"))); // NOI18N
@@ -208,13 +206,7 @@ counter c = new counter();
                 EditUser1ActionPerformed(evt);
             }
         });
-        jPanel2.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 60, 60));
-
-        jLabel2.setText("ID_Skrinka");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
-
-        idskrinka.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.add(idskrinka, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 130, -1));
+        jPanel2.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 60, 60));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
@@ -226,38 +218,44 @@ counter c = new counter();
     }//GEN-LAST:event_GoBackActionPerformed
 
     private void EditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUserActionPerformed
-           try {
-                  idskrinkaField = idskrinka.toString();
+        String meno = EditMenoField.getText();
+        String priezvisko = EditPriezviskoField.getText();
+        String trieda = FieldTelCislo.getText(); 
+  
+        
+        if(meno.isEmpty() == false && priezvisko.isEmpty() == false && trieda.isEmpty() == false){
+
+        try {
+                
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/systemnaspravuskriniek","root","");
                 Statement sta = connection.createStatement();
                 
-                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '"+idskrinkaField+"'");
+                String skrinkaFull = ("SELECT * FROM databaza_skriniek WHERE ID_skrinka = '"+fekete+"'");
                 
                 ResultSet rs = sta.executeQuery(skrinkaFull);
                 
-                
-                if(rs.next()){
-                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena"); 
+
+                   String query = "UPDATE databaza_skriniek SET Meno='"+EditMenoField.getText()+"',Priezvisko='"+EditPriezviskoField.getText()+
+                    "',TelCislo='"+FieldTelCislo.getText()+"' WHERE ID_skrinka = " + fekete;
+                    executeSQlQuery(query);
                     
-                }
-                else{                    
-
-                   //    String query = "UPDATE `databaza_skriniek` SET `Meno`='"+EditMenoField.getText()+"',`Priezvisko`='"+
-                    //   EditPriezviskoField.getText()+"',`TelCislo`='"+FieldTelCislo.getText()+"',`ID_skrinka`='"+idskrinka.getText()+"' WHERE `ID_skrinka` = " + fekete;
-                    //   executeSQlQuery(query);
-
-                       
-                         sta.executeUpdate("UPDATE databaza_skriniek SET (Meno, Priezvisko, telCislo, ID_skrinka)"
-                         +"VALUES ('"+EditMenoField.getText()+"', '"+EditPriezviskoField.getText()+"', '"+FieldTelCislo.getText()+"', '"+idskrinka.getText()+"') WHERE ID_skrinka = " + fekete);
-                }
+                    DefaultTableModel model = (DefaultTableModel) jTable_Display_Users.getModel();
+                    model.setRowCount(0);
+                    Show_Users_In_JTable();
+                
+                
 
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
             }
-                                                  
-           
-     
+ }
+             else{
+             JOptionPane.showMessageDialog(this,"Nezadal si všetky hodnoty");  
+        
+        }
+        
+        
     }//GEN-LAST:event_EditUserActionPerformed
 
     private void EditUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUser1ActionPerformed
@@ -298,7 +296,7 @@ counter c = new counter();
 
         FieldTelCislo.setText(model.getValueAt(i,2).toString());
         
-        idskrinka.setText(model.getValueAt(i,3).toString());
+
         fekete = model.getValueAt(i,3).toString();
        
     }//GEN-LAST:event_jTable_Display_UsersMouseClicked
@@ -345,9 +343,7 @@ counter c = new counter();
     private javax.swing.JTextField FieldTelCislo;
     private javax.swing.JButton GoBack;
     private javax.swing.JLabel Meno;
-    private javax.swing.JTextField idskrinka;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -104,6 +104,7 @@ counter c = new counter();
         AddUser = new javax.swing.JButton();
         EditUser = new javax.swing.JButton();
         Refresh = new javax.swing.JButton();
+        EditLocker = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Display_Users = new javax.swing.JTable();
@@ -137,6 +138,7 @@ counter c = new counter();
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        AddUser.setBackground(new java.awt.Color(204, 204, 204));
         AddUser.setForeground(new java.awt.Color(255, 153, 153));
         AddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AddUser.png"))); // NOI18N
         AddUser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -145,23 +147,34 @@ counter c = new counter();
                 AddUserActionPerformed(evt);
             }
         });
-        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 70, 60));
+        jPanel1.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 70, 60));
 
+        EditUser.setBackground(new java.awt.Color(204, 204, 204));
         EditUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EditUser.png"))); // NOI18N
         EditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EditUserActionPerformed(evt);
             }
         });
-        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 70, 60));
+        jPanel1.add(EditUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 70, 60));
 
+        Refresh.setBackground(new java.awt.Color(204, 204, 204));
         Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/refresh.png"))); // NOI18N
         Refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RefreshActionPerformed(evt);
             }
         });
-        jPanel1.add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 70, 60));
+        jPanel1.add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 70, 60));
+
+        EditLocker.setBackground(new java.awt.Color(204, 204, 204));
+        EditLocker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/school_locker5.png"))); // NOI18N
+        EditLocker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditLockerActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EditLocker, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 70, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 440));
 
@@ -234,6 +247,12 @@ counter c = new counter();
         jLabel5.setText(String.valueOf(c.getObsadene()));
     }//GEN-LAST:event_RefreshActionPerformed
 
+    private void EditLockerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditLockerActionPerformed
+        
+        EditLocker ziak1 = new EditLocker();
+        ziak1.setVisible(true);
+    }//GEN-LAST:event_EditLockerActionPerformed
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -270,6 +289,7 @@ counter c = new counter();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddUser;
+    private javax.swing.JButton EditLocker;
     private javax.swing.JButton EditUser;
     private javax.swing.JLabel PocetSkriniek;
     private javax.swing.JPanel Pozadie1;

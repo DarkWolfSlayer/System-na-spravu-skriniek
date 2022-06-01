@@ -179,7 +179,8 @@ counter c = new counter();
                 ResultSet rs = sta.executeQuery(skrinkaFull);
                 
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena");      
+                    JOptionPane.showMessageDialog(this,"Skrinka už je pridelena"); 
+                     
                 }
                 else{                    
                     if(obsadene >= pocet){
@@ -203,7 +204,7 @@ counter c = new counter();
             }
         }
         else{
-             JOptionPane.showMessageDialog(this,"Dodzigal si mi program chuju");  
+             JOptionPane.showMessageDialog(this,"Nezadal si všetky hodnoty");  
         
         }
 
