@@ -214,7 +214,7 @@ public class EditLocker extends javax.swing.JFrame {
             }
             }
             else{
-                JOptionPane.showMessageDialog(this,"Čislo skrinky môže byť od 0 do 50");  
+                JOptionPane.showMessageDialog(this,"Čislo skrinky môže byť od 1 do 50");  
             }
         } else {
             JOptionPane.showMessageDialog(this, "Nezadal si všetky hodnoty");
